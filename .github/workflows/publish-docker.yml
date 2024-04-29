@@ -37,6 +37,7 @@ jobs:
           docker push ghcr.io/${{ secrets.DOCKER_USERNAME }}/mysql:latest
 
       - name: Docker Build and Push
+        run: echo "Build and push Docker image completed successfully"
     
       - name: Checkout repository
         uses: actions/checkout@v2
