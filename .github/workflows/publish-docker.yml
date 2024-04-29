@@ -26,16 +26,6 @@ jobs:
           docker build -t ghcr.io/${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest .  
           docker push ghcr.io/${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
 
-      - name: Build and push image 2
-        run: |
-          docker build -t ghcr.io/${{ secrets.DOCKER_USERNAME }}/phpmyadmin/phpmyadmin:latest -f phpmyadmin/phpmyadmin/Dockerfile .  
-          docker push ghcr.io/${{ secrets.DOCKER_USERNAME }}/phpmyadmin/phpmyadmin:latest
-
-      - name: Build and push image 3
-        run: |
-          docker build -t ghcr.io/${{ secrets.DOCKER_USERNAME }}/mysql:latest -f mysql/Dockerfile . 
-          docker push ghcr.io/${{ secrets.DOCKER_USERNAME }}/mysql:latest
-
       - name: Docker Build and Push
         run: echo "Build and push Docker image completed successfully"
     
