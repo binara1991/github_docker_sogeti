@@ -6,36 +6,15 @@ on:
       - main  # Customize this to match your branch
 
 jobs:
-  docker:
+  publish_image:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: docker/setup-qemu-action@v
-
-    - name: Build MySQL Docker image
-      run: docker build -t ghcr.io/binara1991/mysql:latest ./mysql
-
-    - name: Log in to GitHub Packages for MySQL
-      run: echo ${{ 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 }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-    - name: Push MySQL Docker image
-      run: docker push ghcr.io/binara1991/mysql:latest
-
-    - name: Build PHPMyAdmin Docker image
-      run: docker build -t ghcr.io/binara1991/phpmyadmin:latest ./phpmyadmin
-
-    - name: Log in to GitHub Packages for PHPMyAdmin
-      run: echo ${{ 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 }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-    - name: Push PHPMyAdmin Docker image
-      run: docker push ghcr.io/binara1991/phpmyadmin:latest
-
-    - name: Build Flask Docker image
-      run: docker build -t ghcr.io/binara1991/my_flask:latest ./flask_app
-
-    - name: Log in to GitHub Packages for Flask
-      run: echo ${{ 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 }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-    - name: Push Flask Docker image
-      run: docker push ghcr.io/binara1991/my_flask:latest
+    - name: Checkout
+      uses: action/checkout@v3
+    - name: build
+      run: |
+        docker build .-t binara1991/Github_docker:latest
+    - name: pulish
+      run: |
+        docker login -u binara1991 -p ${{ secrets.DOCKER_GITHUB }}
+        docker push binara1991/Github_docker:latest
